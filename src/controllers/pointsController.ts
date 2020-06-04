@@ -55,6 +55,10 @@ class PointsController {
       items
     } = req.body;
 
+    if (!name || !email || !whatsapp || !city || !uf || !items || !lat || !lon) {
+      return res.status(400).json({ success: false, message: 'Empty mandatory fields.'});
+    }
+
     const trx = await knex.transaction();
 
     const point = {
